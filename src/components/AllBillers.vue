@@ -11,8 +11,11 @@
                 <b-table-column field="id" label="ID"  numeric>
                     {{ props.row.id }}
                 </b-table-column>
-                <b-table-column field="name" label="First Name">
-                    <span class="tag" props.row.name.first}}
+                <b-table-column field="name.first" label="First Name">
+                    {{ props.row.name.first}}
+                </b-table-column>
+                <b-table-column field="name.last" label="Last Name">
+                    {{ props.row.name.last}}
                 </b-table-column>
                 <b-table-column field="email" label="Email">
                     {{ props.row.email}}
