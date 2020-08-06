@@ -8,9 +8,9 @@
             per-page="5"
             focusable>
             <template slot-scope="props">
-                <b-table-column field="id" label="ID"  numeric>
+                <!-- <b-table-column field="id" label="ID">
                     {{ props.row.id }}
-                </b-table-column>
+                </b-table-column> -->
                 <b-table-column field="name.first" label="First Name">
                     {{ props.row.name.first}}
                 </b-table-column>
@@ -20,28 +20,17 @@
                 <b-table-column field="email" label="Email">
                     {{ props.row.email}}
                 </b-table-column>
-                <b-table-column field="phone" label="Phone No" numeric>
+                <b-table-column field="phone" label="Phone No">
                     {{ props.row.phone}}
                 </b-table-column>
-
-                <!-- <b-table-column field="user.last_name" label="Last Name" sortable>
-                    {{ props.row.user.last_name }}
+                <b-table-column field="edit" label="Edit">
+                    <router-link :to="{ path: '/register', query:{id:props.row.id} }">
+                        <font-awesome-icon icon="edit" />
+                    </router-link>
                 </b-table-column>
-
-                <b-table-column field="date" label="Date" sortable centered>
-                    <span class="tag is-success">
-                        {{ new Date(props.row.date).toLocaleDateString() }}
-                    </span>
-                </b-table-column> -->
-
-                <!-- <b-table-column label="Gender">
-                    <span>
-                        <b-icon pack="fas"
-                            :icon="props.row.gender === 'Male' ? 'mars' : 'venus'">
-                        </b-icon>
-                        {{ props.row.gender }}
-                    </span>
-                </b-table-column> -->
+                <b-table-column field="delete" label="Delete">
+                    <font-awesome-icon @click="deleteBiller(props.row.id)" icon="trash" />
+                </b-table-column>
             </template>
         </b-table>
     </div>
@@ -78,6 +67,21 @@ export default {
             console.log(error);
           })
       },
+      deleteBiller(id){
+          console.log(id)
+          axios({
+                method: 'post',
+                url: baseUrl+"/deleteBiller?id="+id,
+            })
+            .then(response=>{
+                console.log(response.data);
+                this.$buefy.dialog.alert(response.data)
+                this.getBillers();
+            })
+            .catch(error=>{
+                this.$buefy.dialog.alert(error)
+            })
+      }
     },
     mounted(){
         this.getBillers();

@@ -44,6 +44,7 @@ const baseUrl = 'http://localhost:8080/biller'
 
 export default {
     name: 'Register',
+    props: ['id'],
     components: {
         NavBar
     },

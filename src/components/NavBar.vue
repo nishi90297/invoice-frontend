@@ -3,10 +3,10 @@
         <b-navbar>
         <template slot="start">
             <router-link to="/allBillers">
-                All Billers &nbsp;                 
+                <b-button>All Billers </b-button>                 
             </router-link>
             <router-link to="/register">
-                Register Biller
+                <b-button>Register Biller</b-button>
             </router-link>
             <!-- <b-navbar-dropdown label="Info">
                 <b-navbar-item href="#">
