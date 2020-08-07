@@ -3,9 +3,19 @@
     <NavBar></NavBar>
         <b-table
             :data="billerList"
-            ref="table"
-            paginated
-            per-page="5"
+            :paginated="isPaginated"
+            :per-page="perPage"
+            :current-page.sync="currentPage"
+            :pagination-simple="isPaginationSimple"
+            :pagination-position="paginationPosition"
+            :default-sort-direction="defaultSortDirection"
+            :sort-icon="sortIcon"
+            :sort-icon-size="sortIconSize"
+            default-sort="billerList.first.name"
+            aria-next-label="Next page"
+            aria-previous-label="Previous page"
+            aria-page-label="Page"
+            aria-current-label="Current page"
             focusable>
             <template slot-scope="props">
                 <!-- <b-table-column field="id" label="ID">
@@ -50,20 +60,42 @@ export default {
     },
     data(){
         return {
-            billerList:[]
+            billerList:[],
+            isPaginated: true,
+            isPaginationSimple: false,
+            paginationPosition: 'bottom',
+            defaultSortDirection: 'asc',
+            sortIcon: 'arrow-up',
+            sortIconSize: 'is-small',
+            currentPage: 1,
+            perPage: 5
         }
     },
     methods:{
+        success(data){
+            this.$buefy.toast.open({
+                    message: data,
+                    type: 'is-success'
+                })
+        },
+        failure(data){
+            this.$buefy.toast.open({
+                    duration: 1000,
+                    message: data,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+            })
+        },
+        info(data){
+            this.$buefy.toast.open(data)
+        },
       getBillers(){
         axios.get(baseUrl)
           .then(response =>{
-            // console.log(this.$data.billerList);
             this.$data.billerList = response.data;
-            // console.log(response.data);
           })
           .catch(error => {
-            // handle error
-            this.$buefy.dialog.alert('Backend Error');
+            this.info('Backend Error');
             console.log(error);
           })
       },
@@ -75,11 +107,11 @@ export default {
             })
             .then(response=>{
                 console.log(response.data);
-                this.$buefy.dialog.alert(response.data)
+                this.success(response.data)
                 this.getBillers();
             })
             .catch(error=>{
-                this.$buefy.dialog.alert(error)
+                this.$buefy.dialog.alert(error.data)
             })
       }
     },
@@ -90,5 +122,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

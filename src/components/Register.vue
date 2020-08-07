@@ -26,10 +26,18 @@
                     </b-field>
                 </div>
             </div>
+            <div class="columns" >
+                <div class="column is-6">
+                    <b-field label="Password">
+                            <b-input id="password" type="password" v-model="userData.password" placeholder="Enter Password"></b-input>
+                    </b-field>
+                </div>
+            </div>
             <div class="columns">
                 <div class="column">
-                    <b-button type="is-primary" @click="register()">Register</b-button>
-                </div>
+                    <b-button v-if="!$route.query.id" type="is-primary" @click="register()">Register</b-button>
+                    <b-button v-if="$route.query.id" type="is-primary" @click="update()">Update</b-button>
+                </div> {{msg}}
             </div>
        </div>   
    </section>
@@ -44,7 +52,7 @@ const baseUrl = 'http://localhost:8080/biller'
 
 export default {
     name: 'Register',
-    props: ['id'],
+    props: ['msg'],
     components: {
         NavBar
     },
@@ -57,11 +65,30 @@ export default {
                 },
                 email:'',
                 phone:'',
+                password:'',
             }
         }
     },
     methods:{
+        success(data){
+            this.$buefy.toast.open({
+                    message: data,
+                    type: 'is-success'
+                })
+        },
+        failure(data){
+            this.$buefy.toast.open({
+                    duration: 1000,
+                    message: data,
+                    position: 'is-bottom',
+                    type: 'is-danger'
+            })
+        },
+        // info(data){
+            // this.$buefy.toast.open(data)
+        // },
         register(){
+            this.$data.userData.id = null;
             console.log(this.userData.name.first);
             this.$data.userData.name.first=this.userData.name.first;
             this.$data.userData.name.last=this.userData.name.last;
@@ -74,13 +101,53 @@ export default {
             })
             .then(response=>{
                 console.log(response.data);
-                this.$buefy.dialog.alert(response.data)
+                this.success(response.data)
+                this.$router.push({ path: 'allBillers'})
             })
             .catch(error=>{
-                this.$buefy.dialog.alert(error)
+                this.failure(error.data)
             })
+        },
+        update(){
+            this.$data.userData.name.first=this.userData.name.first;
+            this.$data.userData.name.last=this.userData.name.last;
+            this.$data.userData.email=this.userData.email;
+            this.$data.userData.phone=this.userData.phone;
+            axios({
+                method: 'post',
+                url: baseUrl+"/updateBiller",
+                data: this.$data.userData,
+            })
+            .then(response=>{
+                console.log(response.data);
+                this.success(response.data)
+                this.$router.push({ path: 'allBillers'})
+            })
+            .catch(error=>{
+                this.failure(error.data)
+            })
+        },
+
+        getBillerDetails(){ 
+            if(this.$route.query.id){
+                console.log("aa rha h kya bhaiiiii i?????")
+                axios({
+                    method: 'get',
+                    url: baseUrl+"/getOneBiller/"+this.$route.query.id,
+                })
+                .then(response =>{
+                        this.userData = response.data;
+                    })
+            }
         }
-    }  
+    } ,
+    mounted(){
+        console.log("load hor ha ?")
+        this.getBillerDetails();
+    } ,
+    beforeMounted(){
+        console.log("dhinchak dchinck")
+    }
 }
 </script>
 
