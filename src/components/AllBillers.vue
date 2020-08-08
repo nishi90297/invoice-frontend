@@ -1,6 +1,6 @@
 <template>
     <div>
-    <NavBar></NavBar>
+    <!-- <NavBar></NavBar> -->
         <b-table
             :data="billerList"
             :paginated="isPaginated"
@@ -49,14 +49,14 @@
 <script>
 
 import axios from 'axios';
-import NavBar from './NavBar'
+// import NavB      ar from './NavBar'
 
 const baseUrl = 'http://localhost:8080/biller'
 
 export default {
     name:'AllBillers',
     components: {
-        NavBar
+        // NavBar
     },
     data(){
         return {

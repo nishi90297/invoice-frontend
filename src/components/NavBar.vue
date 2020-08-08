@@ -1,14 +1,21 @@
 <template>
-    <div>
-        <b-navbar>
+    <b-navbar class="has-background-white-ter">
+        <template slot="brand">
+            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+                <img
+                    src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
+                    alt="Invoicer Application"
+                >
+            </b-navbar-item>
+        </template>
         <template slot="start">
-            <b-navbar-item tag="div">
+            <!-- <b-navbar-item tag="div">
                 <div class="buttons">
                     <router-link to="/allBillers" class="button is-light" >
                         <strong>All Billers</strong>
                     </router-link>
                 </div>
-            </b-navbar-item>
+            </b-navbar-item> -->
             <!-- <b-navbar-dropdown label="Info">
                 <b-navbar-item href="#">
                     About
@@ -25,15 +32,13 @@
                     <router-link to="/register" class="button is-primary">
                         <strong>Sign up</strong>
                     </router-link>
-                    <router-link to="/login" class="button is-light">
-                        Log Out
+                    <router-link to="/login" class="button is-primary">
+                        <strong>Log Out</strong>
                     </router-link>
                 </div>
             </b-navbar-item>
         </template>
     </b-navbar>
-    <br>
-    </div>
 </template>
 
 <script>

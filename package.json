@@ -20,6 +20,7 @@
     "sass-loader": "^9.0.3",
     "vue": "^2.6.11",
     "vue-json-pretty": "^1.6.5",
+    "vue-material-design-icons": "^4.8.0",
     "vue-router": "^3.3.4"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 <template>
-   <section class="section" has-background-white-ter>
-       <NavBar></NavBar>
+   <section class="section">
+       <!-- <NavBar></NavBar> -->
        <div class="container box">
             <div class="columns" >
                 <div class="column">
@@ -45,7 +45,7 @@
 
 <script>
 
-import NavBar from './NavBar'
+// import NavBar from './NavBar'
 import axios from 'axios'
 
 const baseUrl = 'http://localhost:8080/biller'
@@ -54,7 +54,7 @@ export default {
     name: 'Register',
     props: ['msg'],
     components: {
-        NavBar
+        // NavBar
     },
     data(){
         return {

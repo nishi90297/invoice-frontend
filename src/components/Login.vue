@@ -1,25 +1,32 @@
 <template>
-    <section class="section" has-background-white-ter>
-        <div class="container">
-            <div class="columns">
-                <div class="column">
-                    <b-field label="Username">
-                        <b-input type="email" id="email" v-model="email" placeholder="Enter Username"> </b-input>
-                    </b-field>
+    <section class="section has-background-twitter" style="height:90vh">
+        <div class="columns">
+            <div class="column box is-4 is-offset-4">
+                <div class="columns">
+                    <div class="column">
+                        <b-field label="Username">
+                            <b-input type="email" id="email" v-model="email" placeholder="Enter Username"> </b-input>
+                        </b-field>
+                    </div>
                 </div>
-                <div class="column">
-                    <b-field label="Password">
-                        <b-input type="password" id="password" v-model="password" placeholder="Enter Password"> </b-input>
-                    </b-field>
+                <div class="columns">
+                    <div class="column">
+                        <b-field label="Password">
+                            <b-input type="password" id="password" v-model="password" placeholder="Enter Password"> </b-input>
+                        </b-field>
+                    </div>
                 </div>
-            </div>
-            <div class="columns">
-                <div class="column">
-                    <b-button type="is-primary" @click="login()">Log In</b-button>
+                <div class="columns">
+                    <div class="column has-text-centered">
+                        <b-button type="is-primary" @click="login()">Log In</b-button>
+                    </div>
+                    <div class="column">
+                        <router-link to="/register">Don't Have An Account..?</router-link>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
+    </section>  
 </template>
 
 <script>
