@@ -1,6 +1,5 @@
 <template>
     <div>
-    <!-- <NavBar></NavBar> -->
         <b-table
             :data="billerList"
             :paginated="isPaginated"
@@ -49,15 +48,12 @@
 <script>
 
 import axios from 'axios';
-// import NavB      ar from './NavBar'
 
-const baseUrl = 'http://localhost:8080/biller'
+const baseUrl = 'http://localhost:8080'
+// var token = ""
 
 export default {
     name:'AllBillers',
-    components: {
-        // NavBar
-    },
     data(){
         return {
             billerList:[],
@@ -90,7 +86,21 @@ export default {
             this.$buefy.toast.open(data)
         },
       getBillers(){
-        axios.get(baseUrl)
+          console.log(localStorage.getItem('token')+ "token")
+        axios({
+            method: 'get',
+            url: baseUrl,
+            useCredentails: true ,
+            header: {
+                "Accept": "application/json, text/plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                'Content-Type':  'application/json',
+                "Access-Control-Allow-Origin": '*',
+                'Access-Control-Request-Headers': 'Content-Type, Accept',
+                'Authorization': localStorage.getItem('token')
+                // "Authorization":"Bearer "+localStorage.getItem('token')
+            }
+        })
           .then(response =>{
             this.$data.billerList = response.data;
           })
@@ -100,19 +110,25 @@ export default {
           })
       },
       deleteBiller(id){
-          console.log(id)
-          axios({
-                method: 'post',
-                url: baseUrl+"/deleteBiller?id="+id,
-            })
-            .then(response=>{
-                console.log(response.data);
-                this.success(response.data)
-                this.getBillers();
-            })
-            .catch(error=>{
-                this.$buefy.dialog.alert(error.data)
-            })
+        this.$buefy.dialog.confirm({
+            message: 'Are you sure, you want to delete?',
+            cancelText: 'Cancel',
+            confirmText: 'Ok',
+            onConfirm:() => {
+                axios({
+                    method: 'post',
+                    url: baseUrl+"/deleteBiller?id="+id,
+                })
+                .then(response=>{
+                    console.log(response.data);
+                    this.success(response.data)
+                    this.getBillers();
+                })
+                .catch(error=>{
+                    this.$buefy.dialog.alert(error.data)
+                })
+            }
+        })
       }
     },
     mounted(){

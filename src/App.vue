@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" v-if="this.$route.path !=='/login' && this.$route.path!=='/register'">
       <nav-bar></nav-bar>
     </div>
-      <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ Vue.use(Buefy ,{
 export default {
   name: 'App',
   components: {
-    NavBar
+    NavBar,
   }
 }
 </script>

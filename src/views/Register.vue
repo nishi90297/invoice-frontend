@@ -1,6 +1,5 @@
 <template>
    <section class="section">
-       <!-- <NavBar></NavBar> -->
        <div class="container box">
             <div class="columns" >
                 <div class="column">
@@ -26,18 +25,18 @@
                     </b-field>
                 </div>
             </div>
-            <div class="columns" >
+            <div class="columns" v-if="!$route.query.id" >
                 <div class="column is-6">
                     <b-field label="Password">
-                            <b-input id="password" type="password" v-model="userData.password" placeholder="Enter Password"></b-input>
+                            <b-input  id="password" type="password" v-model="userData.password" placeholder="Enter Password"></b-input>
                     </b-field>
                 </div>
             </div>
-            <div class="columns">
-                <div class="column">
+            <div class="columns ">
+                <div class="column has-text-centered">
                     <b-button v-if="!$route.query.id" type="is-primary" @click="register()">Register</b-button>
                     <b-button v-if="$route.query.id" type="is-primary" @click="update()">Update</b-button>
-                </div> {{msg}}
+                </div>
             </div>
        </div>   
    </section>
@@ -45,10 +44,9 @@
 
 <script>
 
-// import NavBar from './NavBar'
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:8080/biller'
+const baseUrl = 'http://localhost:8080'
 
 export default {
     name: 'Register',
@@ -102,7 +100,7 @@ export default {
             .then(response=>{
                 console.log(response.data);
                 this.success(response.data)
-                this.$router.push({ path: 'allBillers'})
+                this.$router.push({ path: 'login'})
             })
             .catch(error=>{
                 this.failure(error.data)

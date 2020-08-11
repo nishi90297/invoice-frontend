@@ -2,10 +2,12 @@
     <b-navbar class="has-background-white-ter">
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
-                <img
+                <!-- <img
                     src="https://raw.githubusercontent.com/buefy/buefy/dev/static/img/buefy-logo.png"
                     alt="Invoicer Application"
-                >
+                > -->
+                <font-awesome-icon  icon="file-invoice" />  INVOICE GENERATOR
+                <!-- <i class="fas fa-file-invoice"></i> -->
             </b-navbar-item>
         </template>
         <template slot="start">
@@ -29,12 +31,12 @@
         <template slot="end">
             <b-navbar-item tag="div">
                 <div class="buttons">
-                    <router-link to="/register" class="button is-primary">
+                    <!-- <router-link to="/register" class="button is-primary">
                         <strong>Sign up</strong>
-                    </router-link>
-                    <router-link to="/login" class="button is-primary">
+                    </router-link> -->
+                    <b-button @click="logout()" class="button is-primary">
                         <strong>Log Out</strong>
-                    </router-link>
+                    </b-button>
                 </div>
             </b-navbar-item>
         </template>
@@ -43,7 +45,18 @@
 
 <script>
 export default {
-    name: 'NavBar'
+    name: 'NavBar',
+    methods:{
+        logout(){
+            this.$buefy.dialog.confirm({
+            message: 'Are you sure, you want to delete?',
+            cancelText: 'Cancel',
+            confirmText: 'Ok',
+            onConfirm:() => {
+            localStorage.removeItem('token')
+            this.$router.push('/login')}})
+        }
+    }
 }
 </script>
 
