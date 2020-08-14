@@ -90,15 +90,13 @@ export default {
         axios({
             method: 'get',
             url: baseUrl,
-            useCredentails: true ,
-            header: {
-                "Accept": "application/json, text/plain, */*",
-                "X-Requested-With": "XMLHttpRequest",
-                'Content-Type':  'application/json',
-                "Access-Control-Allow-Origin": '*',
-                'Access-Control-Request-Headers': 'Content-Type, Accept',
-                'Authorization': localStorage.getItem('token')
-                // "Authorization":"Bearer "+localStorage.getItem('token')
+            headers: {
+                // "Accept": "application/json, text/plain, */*",
+                // "X-Requested-With": "XMLHttpRequest",
+                // 'Content-Type':  'application/json',
+                // "Access-Control-Allow-Origin": '*',
+                // 'Access-Control-Request-Headers': 'Content-Type, Accept',
+                'Authorization':`Bearer ${localStorage.getItem('token')}`
             }
         })
           .then(response =>{

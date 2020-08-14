@@ -49,7 +49,7 @@ export default {
     methods:{
         logout(){
             this.$buefy.dialog.confirm({
-            message: 'Are you sure, you want to delete?',
+            message: 'Are you sure, you want to logout?',
             cancelText: 'Cancel',
             confirmText: 'Ok',
             onConfirm:() => {
