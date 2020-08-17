@@ -1,10 +1,10 @@
 <template>
-    <section class="section bg-img has-background-twitter" style="height:100vh;" >
+    <section class="section" style="height:90vh">
         <div class="columns">
             <div class="column box is-4 is-offset-4">
                 <div class="columns">
-                    <div class="column has-text-centered is-size-3 is-family-primary">
-                        <strong >WELCOME TO INVOICER</strong>
+                    <div class="column has-text-centered is-size-3 has-text-primary is-uppercase">
+                        <strong>WELCOME TO INVOICeR</strong>
                     </div>
                 </div>
                 <br>
@@ -24,7 +24,7 @@
                 </div>
                 <div class="columns">
                     <div class="column has-text-centered">
-                        <b-button type="is-twitter" @click="login()">Log In</b-button>
+                        <b-button type="is-primary" @click="login()">Log In</b-button>
                     </div>
                     <div class="column">
                         <router-link to="/register">Don't Have An Account..?</router-link>
@@ -110,13 +110,16 @@ export default {
 </script>
 
 <style scoped>
-/* .bg-img { 
-        background-image: url("src/assets/b2.jpg") ;
-        background-position: center center;
-        background-repeat:  no-repeat;
-        background-attachment: fixed;
-        background-size:  cover;
-        background-color: #999;
 
- } */
+strong{
+    color: #6e248b;
+}
+
+.section { 
+        background: url(/../src/assets/bg.png) ;
+        background-repeat:  no-repeat;
+        background-size:  cover;
+        height:100vh;
+        margin-top:4em;
+ }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <br>
         <b-table
             :data="billerList"
             :paginated="isPaginated"
@@ -14,8 +15,7 @@
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
-            aria-current-label="Current page"
-            focusable>
+            aria-current-label="Current page">
             <template slot-scope="props">
                 <!-- <b-table-column field="id" label="ID">
                     {{ props.row.id }}
@@ -50,7 +50,6 @@
 import axios from 'axios';
 
 const baseUrl = 'http://localhost:8080'
-// var token = ""
 
 export default {
     name:'AllBillers',
@@ -116,6 +115,9 @@ export default {
                 axios({
                     method: 'post',
                     url: baseUrl+"/deleteBiller?id="+id,
+                    headers: {
+                        'Authorization':`Bearer ${localStorage.getItem('token')}`
+                    }
                 })
                 .then(response=>{
                     console.log(response.data);

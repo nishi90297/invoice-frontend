@@ -1,6 +1,22 @@
 <template>
-   <section class="section">
-       <div class="container box">
+   <section class="section" style="padding-top:15vh">
+       <div class="column box is-6 is-offset-3">
+           <div class="columns">
+                <div class="column has-text-centered is-size-3 is-family-primary">
+                    <strong v-if="!$route.query.id" >Register</strong>
+                    <strong v-if="$route.query.id" >Update</strong>
+                </div>
+            </div>
+
+            <!-- Basic Information -->
+            <div class="columns">
+                <div class="column is-size-4 is-4 ">
+                    Basic Information
+                </div>
+                <div class="column ">
+                    <hr>
+                </div>
+            </div>
             <div class="columns" >
                 <div class="column">
                     <b-field label="First Name">
@@ -21,14 +37,96 @@
                 </div>
                 <div class="column">
                     <b-field label="Phone">
-                            <b-input id="phone" tyle="cl" v-model="userData.phone" placeholder="Enter Phone Number"></b-input>
+                            <b-input id="phone" v-model="userData.phone" placeholder="Enter Phone Number"></b-input>
                     </b-field>
                 </div>
             </div>
+
+            <!-- Address -->
+            <div class="columns">
+                <div class="column is-size-4 is-2 ">
+                    Address
+                </div>
+                <div class="column ">
+                    <hr>
+                </div>
+            </div>
+            <div class="columns" >
+                <div class="column">
+                    <b-field label="Apartment Number">
+                        <b-input id= "apartmentNumber" v-model="userData.address.apartmentNumber" placeholder="Enter Apartment Number"></b-input>
+                    </b-field>
+                </div>
+                <div class="column">
+                    <b-field label="Street">
+                        <b-input id= "street" v-model="userData.address.street" placeholder="Enter Street"></b-input>
+                    </b-field>
+                </div>
+            </div>
+            <div class="columns" >
+                <div class="column">
+                    <b-field label="City">
+                            <b-input id="city" v-model="userData.address.city" placeholder="Enter City"></b-input>
+                    </b-field>
+                </div>
+                <div class="column">
+                    <b-field label="State">
+                            <b-input id="state" v-model="userData.address.state" placeholder="Enter State"></b-input>
+                    </b-field>
+                </div>
+            </div>
+            <div class="columns" >
+                <div class="column">
+                    <b-field label="Country">
+                            <b-input id="country" v-model="userData.address.country" placeholder="Enter Country"></b-input>
+                    </b-field>
+                </div>
+                <div class="column">
+                    <b-field label="Postal Code">
+                            <b-input id="postalCode" v-model="userData.address.postalCode" placeholder="Enter Postal Code"></b-input>
+                    </b-field>
+                </div>
+            </div>
+
+
+            <!-- Other -->
+            <div class="columns">
+                <div class="column is-size-4 is-2 ">
+                    Other
+                </div>
+                <div class="column ">
+                    <hr>
+                </div>
+            </div>
+            <div class="columns" >
+                <div class="column">
+                    <b-field label="IBAN">
+                        <b-input id= "iban" v-model="userData.iban" placeholder="Enter IBAN"></b-input>
+                    </b-field>
+                </div>
+                <div class="column">
+                    <b-field label="Company Name">
+                        <b-input id= "company" v-model="userData.company" placeholder="Enter Company"></b-input>
+                    </b-field>
+                </div>
+            </div>
+            <div class="columns" >
+                <div class="column">
+                    <b-field label="Website URL">
+                        <b-input id= "website" v-model="userData.website" placeholder="Enter Website URL"></b-input>
+                    </b-field>
+                </div>
+            </div>
+
             <div class="columns" v-if="!$route.query.id" >
                 <div class="column is-6">
                     <b-field label="Password">
                             <b-input  id="password" type="password" v-model="userData.password" placeholder="Enter Password"></b-input>
+                    </b-field>
+                </div>
+                <div class="column is-6">
+                    <b-field label="Confirm Password">
+                            <b-input  id="confirmPassword" type="password" v-model="confirmPassword" placeholder="Enter Confirm Password"></b-input>
                     </b-field>
                 </div>
             </div>
@@ -36,6 +134,9 @@
                 <div class="column has-text-centered">
                     <b-button v-if="!$route.query.id" type="is-primary" @click="register()">Register</b-button>
                     <b-button v-if="$route.query.id" type="is-primary" @click="update()">Update</b-button>
+                </div>
+                <div class="column" v-if="!$route.query.id">
+                    <router-link to="/login" >Already Registered..?</router-link>
                 </div>
             </div>
        </div>   
@@ -62,9 +163,18 @@ export default {
                     last:''
                 },
                 email:'',
+                address:{
+                    apartmentNumber:'',
+                    street:'',
+                    city:'',
+                    state:'',
+                    country:'',
+                    postalCode:'',
+                },
                 phone:'',
                 password:'',
-            }
+            },
+            confirmPassword:'',
         }
     },
     methods:{
@@ -86,35 +196,36 @@ export default {
             // this.$buefy.toast.open(data)
         // },
         register(){
-            this.$data.userData.id = null;
-            console.log(this.userData.name.first);
-            this.$data.userData.name.first=this.userData.name.first;
-            this.$data.userData.name.last=this.userData.name.last;
-            this.$data.userData.email=this.userData.email;
-            this.$data.userData.phone=this.userData.phone;
-            axios({
+            console.log(this.userData.password)
+            console.log(this.confirmPassword)
+            if(this.userData.password!==(this.confirmPassword)){
+                this.failure("Password Does Not Match")
+            } 
+            else{
+                axios({
                 method: 'post',
                 url: baseUrl+"/register",
-                data: this.$data.userData,
-            })
-            .then(response=>{
-                console.log(response.data);
-                this.success(response.data)
-                this.$router.push({ path: 'login'})
-            })
-            .catch(error=>{
-                this.failure(error.data)
-            })
+                data: this.$data.userData
+                })
+                .then(response=>{
+                    console.log(response.data);
+                    this.success(response.data)
+                    this.$router.push({ path: 'login'})
+                })
+                .catch(error=>{
+                    this.failure(error.data)
+                })
+            }
+            
         },
         update(){
-            this.$data.userData.name.first=this.userData.name.first;
-            this.$data.userData.name.last=this.userData.name.last;
-            this.$data.userData.email=this.userData.email;
-            this.$data.userData.phone=this.userData.phone;
             axios({
                 method: 'post',
                 url: baseUrl+"/updateBiller",
                 data: this.$data.userData,
+                headers: {
+                        'Authorization':`Bearer ${localStorage.getItem('token')}`
+                }
             })
             .then(response=>{
                 console.log(response.data);
@@ -128,10 +239,12 @@ export default {
 
         getBillerDetails(){ 
             if(this.$route.query.id){
-                console.log("aa rha h kya bhaiiiii i?????")
                 axios({
                     method: 'get',
                     url: baseUrl+"/getOneBiller/"+this.$route.query.id,
+                    headers:{
+                        'Authorization':`Bearer ${localStorage.getItem('token')}`
+                    }
                 })
                 .then(response =>{
                         this.userData = response.data;
@@ -140,15 +253,18 @@ export default {
         }
     } ,
     mounted(){
-        console.log("load hor ha ?")
         this.getBillerDetails();
     } ,
     beforeMounted(){
-        console.log("dhinchak dchinck")
     }
 }
 </script>
 
 <style scoped>
+
+hr{
+    background-color: #6e248b;
+}
+
 
 </style>

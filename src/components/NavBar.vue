@@ -28,7 +28,17 @@
             </b-navbar-dropdown> -->
         </template>
 
-        <template slot="end">
+        <template slot="end"  v-if="this.$route.path !=='/login' && this.$route.path!=='/register'">
+            <b-navbar-item tag="div">
+                <div class="buttons">
+                    <!-- <router-link to="/register" class="button is-primary">
+                        <strong>Sign up</strong>
+                    </router-link> -->
+                    <b-button class="button is-primary">
+                        <strong>Profile</strong>
+                    </b-button>
+                </div>
+            </b-navbar-item>
             <b-navbar-item tag="div">
                 <div class="buttons">
                     <!-- <router-link to="/register" class="button is-primary">
@@ -61,8 +71,4 @@ export default {
 </script>
 
 <style scoped>
-
-#space{
-    margin: 10px;
-}
 </style>

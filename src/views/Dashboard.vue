@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="columns">
+        <div class="columns" style="padding-top:8vh">
             <div class="column is-2" >
                 <side-bar></side-bar>
             </div>
@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style scoped>
-
+    
 </style>
