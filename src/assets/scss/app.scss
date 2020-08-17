@@ -2,7 +2,7 @@
 @import "~bulma/sass/utilities/_all";
 
 // Set your colors
-$primary: #8c67ef;
+$primary: #6e248b;
 $primary-invert: findColorInvert($primary);
 $twitter: #4099FF;
 $twitter-invert: findColorInvert($twitter);
@@ -19,12 +19,17 @@ $colors: (
     "warning": ($warning, $warning-invert),
     "danger": ($danger, $danger-invert),
     "twitter": ($twitter, $twitter-invert)
+
 );
 
 // Links
-$link: $twitter;
+$link: $primary;
 $link-invert: $primary-invert;
 $link-focus-border: $primary;
+$menu-list-color: $twitter;
+$menu-label-color: $primary;
+$menu-label-font-size: 1em;
+
 
 // Import Bulma and Buefy styles
 @import "~bulma";
