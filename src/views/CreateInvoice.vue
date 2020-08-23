@@ -11,12 +11,12 @@
             <div class="column is-8 ">
                 <div class="columns">
                     <div class="column is-6 ">
-                      <span style="font-size: 25px; font-weight: bold; padding: 0" >INVOICE NUMBER:-  </span>
-                      <span style="font-size: 25px; font-weight: bold " class="has-text-primary">INV-001</span>
+                      <span style="font-size: 25px; font-weight: bold; padding: 10px" class="has-background-warning" >INVOICE NUMBER:-  </span>
+                      <span style="font-size: 25px; font-weight: bold;  padding: 10px " class="has-text-primary has-background-warning">INV-001</span>
                       <hr class="has-background-dark">
                     </div>
                     <div class="column is-6">
-                        <b-field label="Due Date">
+                        <b-field label="Due Date" v-model="invoiceForm.dueDate">
                             <b-datepicker
                                 v-model="selected"
                                 :show-week-number="showWeekNumber"
@@ -31,12 +31,12 @@
                 <div class="columns">
                     <div class="column is-6">
                       <b-field label="Payer Name">
-                        <b-input id= "payerName" type="text" placeholder="Enter Payer Name"></b-input>
+                        <b-input id= "payerName" v-model="invoiceForm.payerName" type="text" placeholder="Enter Payer Name"></b-input>
                       </b-field>
                     </div>
                     <div class="column is-6">
                         <b-field label="Payer Email">
-                            <b-input id= "payerEmail" type="email" placeholder="Enter Payer Email"></b-input>
+                            <b-input id= "payerEmail" v-model="invoiceForm.payerEmail" type="email" placeholder="Enter Payer Email"></b-input>
                         </b-field>
                     </div>
                 </div>
@@ -62,33 +62,43 @@
             </div>  
         </div>
     </div>
-    
+
+    <div class="box" v-if="invoiceForm.templateNo==1">
+      <div class="columns">
+        <div class="column">
+          <b-field label="Free Text">
+            <b-input maxlength="200" rows="2" type="textarea" id= "freetext" v-model="invoiceForm.freeText"></b-input>
+          </b-field>
+        </div>
+      </div>
+    </div>
+
     <div class="box">
         <b-table
-            :data="product"
+            :data="invoiceForm.product"
             >
             <template slot-scope="props">
                 <b-table-column field="name" label="Name">
-                    <b-input is-small id= "name" v-model="product.name" placeholder="Enter Name" custom-class></b-input>
+                    <b-input is-small id= "name" v-model="props.row.name" placeholder="Enter Name" custom-class></b-input>
                 </b-table-column>
 
                 <b-table-column field="description" label="Description" >
-                    <b-input id= "description" v-model="product.description" placeholder="Enter Description"></b-input>
+                    <b-input id= "description" v-model="props.row.description" placeholder="Enter Description"></b-input>
                 </b-table-column>
 
                 <b-table-column field="price" label="Price" numeric>
-                    <b-input id= "price" type="number" min="0"  v-model="product.price" placeholder="Enter Price"></b-input>
+                    <b-input id= "price" type="number" min="0" @input="calculateTotal"  v-model="props.row.price" placeholder="Enter Price"></b-input>
                 </b-table-column>
 
                 <b-table-column field="quantity" label="Quantity" numeric>
-                    <b-input id= "quantity" type="number" min="0"  v-model="product.quantity" placeholder="Enter Quantity"></b-input>
+                    <b-input id= "quantity" type="number" min="0"  @input="calculateTotal" v-model="props.row.quantity" placeholder="Enter Quantity"></b-input>
                 </b-table-column>
 
                 <b-table-column field="total" label="Total" centered >
                     <span>{{props.row.price * props.row.quantity}}</span>
                 </b-table-column>
                 <b-table-column field="total" label="Delete" centered >
-                  <font-awesome-icon icon="trash" @click="removeProduct(props.row.id)" />
+                  <font-awesome-icon icon="trash"  @click="removeProduct(props.row.id)" />
                 </b-table-column>
             </template>
         </b-table>
@@ -103,7 +113,7 @@
           <div class="column is-8">
             <div class="box">
               <b-field label="Footer">
-                <b-input maxlength="200" rows="3" type="textarea" id= "footer"></b-input>
+                <b-input maxlength="200" rows="3" type="textarea" id= "footer" v-model="invoiceForm.footer"></b-input>
               </b-field>
             </div>
           </div>
@@ -112,9 +122,9 @@
                 <div class="columns" style="font-size: 1.2rem;">
                   <div class="column">Discount :</div>
                     <div class="column">
-                      <b-select placeholder="Discount" expanded>
-                        <option>10%</option>
-                        <option>20%</option>
+                      <b-select placeholder="Discount" expanded @input="calculateTotal" v-model="invoiceForm.discount">
+                        <option value="10">10%</option>
+                        <option value="20">20%</option>
                       </b-select>
                     </div>
                 </div>
@@ -122,14 +132,14 @@
               <div class="box">
                 <div class="columns has-text-weight-bold" style="font-size: 1.9rem;">
                   <div class="column ">Total  :</div>
-                  <div class="column has-text-right">Rs 8989/- </div>
+                  <div class="column has-text-right" >Rs {{invoiceForm.total}}/- </div>
                 </div>
               </div>
             </div>
       </div>
       <div class="columns " style="position: fixed; bottom: 2%; right: 1%;width: 83.3%;" >
         <div class="column has-text-right has-background-primary ">
-          <b-button>Continue</b-button>
+          <b-button @click="step2()">Continue</b-button>
         </div>
       </div>
 
@@ -140,14 +150,24 @@
 
 export default {
     name:'CreateInvoice',
+
     data() {
         return {
+          invoiceForm:{
+            dueDate:Date,
+            payerName:'',
+            payerEmail:'',
             product:[],
-            selected: new Date(),
-            showWeekNumber: false,
-            locale: undefined ,
-            dropFiles:[], // Browser locale
-            data:[],
+            footer:'',
+            discount:0,
+            total:'',
+            templateNo: this.$route.query.templateNo,
+          },
+          selected: new Date(),
+          showWeekNumber: false,
+          locale: undefined ,
+          dropFiles:[], // Browser locale
+          data:[],
 
             
         }
@@ -155,13 +175,13 @@ export default {
   methods:{
       addProduct(){
         let newProduct={
-          id:this.$data.product.length+1,
+          id:this.invoiceForm.product.length+1,
           name: '',
           description:'',
           price:0,
-          quantity:0,
+          quantity:0
         }
-       this.product.push(newProduct)
+       this.invoiceForm.product.push(newProduct)
       },
 
     removeProduct(productId){
@@ -170,9 +190,22 @@ export default {
         cancelText: 'Cancel',
         confirmText: 'Ok',
         onConfirm:() => {
-          this.product = this.product.filter(row=> row.id!=productId)
+          this.invoiceForm.product = this.invoiceForm.product.filter(row=> row.id!=productId)
+          this.calculateTotal();
         }
       })
+    },
+
+    calculateTotal(){
+      var total =0;
+      this.$data.invoiceForm.product.forEach(obj=> {
+        total = total+ (obj.price*obj.quantity);
+      })
+      this.invoiceForm.total= Math.round(total*(1-(this.invoiceForm.discount/100)));
+    },
+
+    step2(){
+      console.log(this.invoiceForm);
     }
   },
   mounted() {
@@ -186,12 +219,4 @@ export default {
 .border{
     border:solid thin black;
 }
-
-.footer{
-  position: fixed;
-  bottom: 0;
-  right: 1%;
-  width: 83.3%;
-}
-
 </style>
