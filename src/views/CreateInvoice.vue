@@ -139,7 +139,7 @@
       </div>
       <div class="columns " style="position: fixed; bottom: 2%; right: 1%;width: 83.3%;" >
         <div class="column has-text-right has-background-primary ">
-          <b-button @click="step2()">Continue</b-button>
+          <b-button @click="sendingModePage()">Continue</b-button>
         </div>
       </div>
 
@@ -148,13 +148,17 @@
 
 <script>
 
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:8080'
+
 export default {
     name:'CreateInvoice',
 
     data() {
         return {
           invoiceForm:{
-            dueDate:Date,
+            dueDate:'',
             payerName:'',
             payerEmail:'',
             product:[],
@@ -172,40 +176,72 @@ export default {
             
         }
     },
-  methods:{
-      addProduct(){
-        let newProduct={
-          id:this.invoiceForm.product.length+1,
-          name: '',
-          description:'',
-          price:0,
-          quantity:0
-        }
-       this.invoiceForm.product.push(newProduct)
-      },
+  methods: {
+    success(data){
+      this.$buefy.toast.open({
+        message: data,
+        type: 'is-success'
+      })
+    },
+    failure(data){
+      this.$buefy.toast.open({
+        duration: 1000,
+        message: data,
+        position: 'is-bottom',
+        type: 'is-danger'
+      })
+    },
+    // info(data){
+    // this.$buefy.toast.open(data)
+    // },
+    addProduct() {
+      let newProduct = {
+        id: this.invoiceForm.product.length + 1,
+        name: '',
+        description: '',
+        price: 0,
+        quantity: 0
+      }
+      this.invoiceForm.product.push(newProduct)
+    },
 
-    removeProduct(productId){
+    removeProduct(productId) {
       this.$buefy.dialog.confirm({
         message: 'Are you sure, you want to delete?',
         cancelText: 'Cancel',
         confirmText: 'Ok',
-        onConfirm:() => {
-          this.invoiceForm.product = this.invoiceForm.product.filter(row=> row.id!=productId)
+        onConfirm: () => {
+          this.invoiceForm.product = this.invoiceForm.product.filter(row => row.id != productId)
           this.calculateTotal();
         }
       })
     },
 
-    calculateTotal(){
-      var total =0;
-      this.$data.invoiceForm.product.forEach(obj=> {
-        total = total+ (obj.price*obj.quantity);
+    calculateTotal() {
+      var total = 0;
+      this.$data.invoiceForm.product.forEach(obj => {
+        total = total + (obj.price * obj.quantity);
       })
-      this.invoiceForm.total= Math.round(total*(1-(this.invoiceForm.discount/100)));
+      this.invoiceForm.total = Math.round(total * (1 - (this.invoiceForm.discount / 100)));
     },
 
-    step2(){
-      console.log(this.invoiceForm);
+    sendingModePage() {
+      axios({
+        method: 'post',
+        url: baseUrl + "/addInvoiceForm",
+        data: this.invoiceForm,
+        headers: {
+          'Authorization':`Bearer ${localStorage.getItem('token')}`
+        }
+      })
+          .then(response => {
+            console.log(response.data);
+            this.success(response.data)
+            this.$router.push({path: 'sendingMode'})
+          })
+          .catch(error => {
+            this.failure(error.data)
+          })
     }
   },
   mounted() {

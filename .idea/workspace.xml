@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab109f04-7818-4965-b788-099f55af50fb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/SendingMode.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/CreateInvoice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreateInvoice.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Register.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ViewInvoices.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewInvoices.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +45,7 @@
       <updated>1598117247040</updated>
       <workItem from="1598117248556" duration="1879000" />
       <workItem from="1598191951539" duration="3620000" />
-      <workItem from="1598198012758" duration="8995000" />
+      <workItem from="1598198012758" duration="12052000" />
     </task>
     <servers />
   </component>
@@ -80,5 +84,9 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="660" y="252" key="run.anything.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1598203710560" />
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1598210771105">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup/72.27.1848.1053@72.27.1848.1053" timestamp="1598210771105" />
   </component>
 </project>

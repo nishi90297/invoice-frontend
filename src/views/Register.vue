@@ -196,8 +196,6 @@ export default {
             // this.$buefy.toast.open(data)
         // },
         register(){
-            console.log(this.userData.password)
-            console.log(this.confirmPassword)
             if(this.userData.password!==(this.confirmPassword)){
                 this.failure("Password Does Not Match")
             } 

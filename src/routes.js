@@ -8,6 +8,7 @@ import Dashboard from './views/Dashboard'
 import AddInvoice from './views/AddInvoice'
 import ViewInvoices from './views/ViewInvoices'
 import CreateInvoice from './views/CreateInvoice'
+import SendingMode from "./views/SendingMode";
 
 Vue.use(Router)
 
@@ -23,6 +24,7 @@ export default new Router({
         { path: '/addInvoice', component: AddInvoice },
         { path: '/viewInvoices', component: ViewInvoices },
         { path: '/createInvoice', component: CreateInvoice },
+        { path: '/sendingMode', component: SendingMode },
         { path: '*',component: AllBillers },
      ]}
     ],
