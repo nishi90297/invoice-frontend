@@ -81,6 +81,9 @@
                 <b-table-column field="total" label="Total" centered >
                     <span>{{props.row.price * props.row.quantity}}</span>
                 </b-table-column>
+                <b-table-column field="total" label="Delete" centered >
+                  <font-awesome-icon icon="trash" />
+                </b-table-column>
             </template>
         </b-table>
     </div>
@@ -89,26 +92,34 @@
           <div class="column is-8">
             <div class="box">
               <b-field label="Footer">
-                <b-input maxlength="200" rows="6" type="textarea" id= "footer"></b-input>
+                <b-input maxlength="200" rows="3" type="textarea" id= "footer"></b-input>
               </b-field>
             </div>
           </div>
           <div class="column is-4">
               <div class="box">
-                <b-field label="Discount">
-                  <b-select placeholder="Select Discount">
-                    <option value="0">0%</option>
-                    <option value="0">10%</option>
-                    <option value="0">20%</option>
-                  </b-select>
-                </b-field>
+                <div class="columns" style="font-size: 1.2rem;">
+                  <div class="column">Discount :</div>
+                    <div class="column">
+                      <b-select placeholder="Discount" expanded>
+                        <option>10%</option>
+                        <option>20%</option>
+                      </b-select>
+                    </div>
+                </div>
               </div>
-              <div class="box" style="height: 125px">
-                <b-field label="Final Amount">
-                  <b-input id= "" placeholder="Enter Website URL"></b-input>
-                </b-field>
+              <div class="box">
+                <div class="columns has-text-weight-bold" style="font-size: 1.9rem;">
+                  <div class="column ">Total  :</div>
+                  <div class="column has-text-right">Rs 8989/- </div>
+                </div>
               </div>
             </div>
+      </div>
+      <div class="columns " style="position: fixed; bottom: 2%; right: 1%;width: 83.3%;" >
+        <div class="column has-text-right has-background-primary ">
+          <b-button>Continue</b-button>
+        </div>
       </div>
 
     </section>
@@ -146,4 +157,12 @@ export default {
 .border{
     border:solid thin black;
 }
+
+.footer{
+  position: fixed;
+  bottom: 0;
+  right: 1%;
+  width: 83.3%;
+}
+
 </style>
