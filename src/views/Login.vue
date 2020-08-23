@@ -18,7 +18,7 @@
                 <div class="columns">
                     <div class="column">
                         <b-field label="Password">
-                            <b-input type="password" id="password" v-model="loginRequest.password" placeholder="Enter Password"> </b-input>
+                            <b-input type="password" id="password" v-model="loginRequest.password" placeholder="Enter Password" password-reveal> </b-input>
                         </b-field>
                     </div>
                 </div>

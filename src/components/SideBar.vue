@@ -1,5 +1,5 @@
 <template>
-    <section class="has-background-white-ter" style="height:90vh ; padding-left: 3vh ">
+    <section style="height:90vh ; padding-left: 3vh ">
         <br>
         <b-menu >
             <b-menu-item label="Dashboard" tag="router-link" to="/dashboard/allBillers"></b-menu-item>

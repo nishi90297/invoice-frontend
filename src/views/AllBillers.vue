@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <br>
+    <section class="section">
         <b-table
             :data="billerList"
             :paginated="isPaginated"
@@ -15,7 +14,8 @@
             aria-next-label="Next page"
             aria-previous-label="Previous page"
             aria-page-label="Page"
-            aria-current-label="Current page">
+            aria-current-label="Current page"
+            focusable>
             <template slot-scope="props">
                 <!-- <b-table-column field="id" label="ID">
                     {{ props.row.id }}
@@ -42,7 +42,7 @@
                 </b-table-column>
             </template>
         </b-table>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -138,4 +138,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

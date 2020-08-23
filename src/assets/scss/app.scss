@@ -22,6 +22,12 @@ $colors: (
 
 );
 
+//Navbar
+// $navbar-item-img-max-height: none;
+// $control-border-width: 2px;
+// $input-border-color: transparent;
+// $input-shadow: none;
+
 // Links
 $link: $primary;
 $link-invert: $primary-invert;
@@ -29,6 +35,7 @@ $link-focus-border: $primary;
 $menu-list-color: $twitter;
 $menu-label-color: $primary;
 $menu-label-font-size: 1em;
+$input-radius:2px;
 
 
 // Import Bulma and Buefy styles

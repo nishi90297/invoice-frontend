@@ -14,9 +14,7 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import NavBar from './components/NavBar'
 
-Vue.use(Buefy ,{
-  defaultIconPack: 'fas'
-})
+Vue.use(Buefy )
 
 export default {
   name: 'App',

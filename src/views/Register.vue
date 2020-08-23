@@ -121,12 +121,12 @@
             <div class="columns" v-if="!$route.query.id" >
                 <div class="column is-6">
                     <b-field label="Password">
-                            <b-input  id="password" type="password" v-model="userData.password" placeholder="Enter Password"></b-input>
+                            <b-input  id="password" type="password" v-model="userData.password" placeholder="Enter Password" password-reveal></b-input>
                     </b-field>
                 </div>
                 <div class="column is-6">
                     <b-field label="Confirm Password">
-                            <b-input  id="confirmPassword" type="password" v-model="confirmPassword" placeholder="Enter Confirm Password"></b-input>
+                            <b-input  id="confirmPassword" type="password" v-model="confirmPassword" placeholder="Enter Confirm Password" password-reveal></b-input>
                     </b-field>
                 </div>
             </div>

@@ -4,7 +4,7 @@
             <div class="column is-2" >
                 <side-bar></side-bar>
             </div>
-            <div class="column">
+            <div class="column has-background-white-ter">
                 <router-view></router-view>
             </div>
         </div>
