@@ -28,6 +28,11 @@
                             <b-input id= "payerEmail" type="email" placeholder="Enter Payer Email"></b-input>
                         </b-field>
                     </div>
+                    <div class="column is-6">
+                      <b-field label="Invoice No">
+                        <b-input id= "invoiceNo" placeholder="INV-001" disabled></b-input>
+                      </b-field>
+                    </div>
                 </div>
             </div>  
             <div class="column is-3 is-offset-1">
@@ -80,33 +85,31 @@
         </b-table>
     </div>
 
-    <div class="box">
-        <div class="columns">
-            <div class="column is-8">
-                <b-field label="Footer">
-                    <b-input id= "footer"></b-input>
+    <div class="columns">
+          <div class="column is-8">
+            <div class="box">
+              <b-field label="Footer">
+                <b-input maxlength="200" rows="6" type="textarea" id= "footer"></b-input>
+              </b-field>
+            </div>
+          </div>
+          <div class="column is-4">
+              <div class="box">
+                <b-field label="Discount">
+                  <b-select placeholder="Select Discount">
+                    <option value="0">0%</option>
+                    <option value="0">10%</option>
+                    <option value="0">20%</option>
+                  </b-select>
                 </b-field>
+              </div>
+              <div class="box" style="height: 125px">
+                <b-field label="Final Amount">
+                  <b-input id= "" placeholder="Enter Website URL"></b-input>
+                </b-field>
+              </div>
             </div>
-            <div class="column is-4">
-                <div class="columns">
-                    <div class="Discount">
-                        <b-field label="Discount">
-                            <b-select placeholder="Select Discount">
-                                <option value="0">0%</option>
-                                <option value="0">10%</option>
-                                <option value="0">20%</option>
-                            </b-select>
-                        </b-field>
-                    </div>
-                </div>
-                <div class="columns">
-                    <b-field label="Final Amount">
-                        <b-input id= "" placeholder="Enter Website URL"></b-input>
-                    </b-field>
-                </div>                
-            </div>
-        </div>
-    </div>
+      </div>
 
     </section>
 </template>
@@ -143,14 +146,4 @@ export default {
 .border{
     border:solid thin black;
 }
-
-.section{
-    /* font-size: 1em; */
-}
-
-
-/* .box{
-   margin-right: .5em; 
-} */
-
 </style>
