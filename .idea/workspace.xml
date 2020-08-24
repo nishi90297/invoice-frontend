@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab109f04-7818-4965-b788-099f55af50fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/views/SendingMode.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/CreateInvoice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreateInvoice.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Register.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ViewInvoices.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewInvoices.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,7 +42,9 @@
       <updated>1598117247040</updated>
       <workItem from="1598117248556" duration="1879000" />
       <workItem from="1598191951539" duration="3620000" />
-      <workItem from="1598198012758" duration="12052000" />
+      <workItem from="1598198012758" duration="12287000" />
+      <workItem from="1598264034707" duration="370000" />
+      <workItem from="1598283153809" duration="8347000" />
     </task>
     <servers />
   </component>

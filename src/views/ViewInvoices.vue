@@ -17,16 +17,21 @@
         aria-current-label="Current page"
         focusable>
       <template slot-scope="props">
-        <b-table-column field="name.first" label="Payer Name">
-          {{ props.row.payerName}}
+        <b-table-column field="payerName" label="Payer Name">
+          {{ props.row.invoiceData.payerName}}
         </b-table-column>
-        <b-table-column field="name.last" label="Payer Email">
-          {{ props.row.payerEmail}}
+        <b-table-column field="payerEmail" label="Payer Email">
+          {{ props.row.invoiceData.payerEmail}}
         </b-table-column>
-        <b-table-column field="email" label="Footer">
-          {{ props.row.footer}}
+        <b-table-column field="createdAt" label="Created At">
+          {{ props.row.createdAt}}
         </b-table-column>
-        <b-table-column field="phone" label="Total">
+        <b-table-column field="status" label="Status">
+          <span v-if="props.row.statusCode==101" class="has-text-warning has-text-weight-bold">{{ props.row.status}}</span>
+          <span v-if="props.row.statusCode==102" class="has-text-info has-text-weight-bold">{{ props.row.status}}</span>
+          <span v-if="props.row.statusCode==103" class="has-text-success has-text-weight-bold">{{ props.row.status}}</span>
+        </b-table-column>
+        <b-table-column field="total" label="Total Amount">
           {{ props.row.total}}
         </b-table-column>
       </template>
