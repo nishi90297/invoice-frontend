@@ -23,8 +23,8 @@
         <b-table-column field="payerEmail" label="Payer Email">
           {{ props.row.invoiceData.payerEmail}}
         </b-table-column>
-        <b-table-column field="createdAt" label="Created At">
-          {{ props.row.createdAt}}
+        <b-table-column field="dueDate" label="Due Date">
+          {{ props.row.invoiceData.dueDate  }}
         </b-table-column>
         <b-table-column field="status" label="Status">
           <span v-if="props.row.statusCode==101" class="has-text-warning has-text-weight-bold">{{ props.row.status}}</span>

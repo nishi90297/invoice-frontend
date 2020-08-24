@@ -139,7 +139,7 @@
       </div>
       <div class="columns" style="position: fixed; bottom: 2%; right: 1%;width: 83.3%;" >
         <div class="column has-text-right has-background-primary ">
-          <b-button @click="sendingModePage()">Continue</b-button>
+          <b-button @click="createInvoiceContinue()">Continue</b-button>
         </div>
       </div>
 
@@ -230,8 +230,8 @@ export default {
 
     },
 
-    sendingModePage() {
-      this.invoice.invoiceData.dueDate=this.invoice.invoiceData.dueDate.toJSON();
+    createInvoiceContinue() {
+      // this.invoice.invoiceData.dueDate=this.invoice.invoiceData.dueDate.toJSON();
       axios({
         method: 'post',
         url: baseUrl + "/addInvoiceForm",
@@ -241,9 +241,8 @@ export default {
         }
       })
           .then(response => {
-            console.log(response.data);
-            this.success(response.data)
-            this.$router.push({path: 'sendingMode'})
+            this.success("Successfully Added")
+            this.$router.push({path: 'sendingMode', query:{ invoiceId:response.data}})
           })
           .catch(error => {
             this.failure(error.data)
