@@ -41,3 +41,21 @@ $input-radius:2px;
 // Import Bulma and Buefy styles
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
+
+//custom class
+.mt5{
+  margin-top: 5rem;
+}
+.mt4{
+  margin-top: 4rem;
+}
+.mt3{
+  margin-top: 3rem;
+}
+.mt2{
+  margin-top: 2rem;
+}
+
+.mt1{
+  margin-top: 1rem;
+}

@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab109f04-7818-4965-b788-099f55af50fb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/CreateInvoice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreateInvoice.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/scss/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/scss/app.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/SendingMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SendingMode.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ViewInvoices.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ViewInvoices.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,13 +25,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -45,7 +48,9 @@
       <workItem from="1598191951539" duration="3620000" />
       <workItem from="1598198012758" duration="12287000" />
       <workItem from="1598264034707" duration="370000" />
-      <workItem from="1598283153809" duration="12299000" />
+      <workItem from="1598283153809" duration="12428000" />
+      <workItem from="1598457736902" duration="2036000" />
+      <workItem from="1598466797696" duration="2475000" />
     </task>
     <servers />
   </component>
