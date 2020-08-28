@@ -23,7 +23,7 @@
               <span class="has-text-primary">no-reply@invoicer.com</span>
             </p>
             <b-field label="Payer Email" class="mt3">
-              {{ preferences.mail.emailId }}
+              {{ invoice.invoiceData.payerEmail }}
             </b-field>
             <b-field label="Mail Subject" class="mt3">
               <b-input maxlength="100" type="text" v-model="preferences.mail.subject" />
@@ -50,21 +50,71 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <p class="has-text-weight-bold">Dear {{userInfo.name.first+" "+ userInfo.name.last}},</p>
+                  <p class="has-text-weight-bold">Dear {{invoice.invoiceData.payerName}},</p>
                 </div>
-                <div class="column">
-                  <p class="mt1">{{preferences.mail.message}}</p>
-                </div>
-                <hr class="has-background-grey-lighter">
               </div>
               <div class="columns">
                 <div class="column">
+                  <p>{{preferences.mail.message}}</p>
+                </div>
+              </div>
+                <hr class="has-background-grey-lighter">
+              <div class="columns">
+                <div class="column is-6">
                   <p class="has-text-weight-bold">Rs {{invoice.total}}.00</p>
                 </div>
-                <div class="column">
-                  <p class="mt1">Due Date- {{invoice.dueDate}}</p>
+                <div class="column is-6 has-text-right" >
+                  <b-button class="button is-primary">
+                    <strong>Pay Invoice</strong>
+                  </b-button>
                 </div>
-                <hr class="has-background-grey-lighter">
+              </div>
+              <div class="columns">
+                <div class="column">
+                  <p class="has-text-danger has-text-weight-bold">Due Date- {{invoice.invoiceData.dueDate | formatDate}}</p>
+                </div>
+                <div class="column is-6 has-text-right" >
+                  <b-button class="button is-primary">
+                    <strong>Download</strong>
+                  </b-button>
+                </div>
+              </div>
+              <hr class="has-background-grey-lighter">
+              <div class="columns">
+                <div class="column">
+                  <p class="has-text-weight-bold">Invoice Information</p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-6">
+                  <p>Invoice Number:</p>
+                </div>
+                <div class="column is-6">
+                  <p> {{invoice.invoiceNumber}}</p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-6">
+                  <p>Create At:</p>
+                </div>
+                <div class="column is-6">
+                  <p>{{invoice.createdAt | formatDate}}</p>
+                </div>
+              </div>
+              <div class="columns">
+                <div class="column is-6">
+                  <p>Total No. of products:</p>
+                </div>
+                <div class="column is-6">
+                  <p>{{invoice.invoiceData.products.length}}</p>
+                </div>
+              </div>
+              <hr class="has-background-grey-lighter">
+              <div class="columns">
+                <div class="column">
+                  <p>Regards,</p>
+                  <p>{{userInfo.name.first+" "+ userInfo.name.last}}</p>
+                </div>
               </div>
             </div>
           </div>

@@ -75,7 +75,7 @@
 
     <div class="box">
         <b-table
-            :data="invoice.invoiceData.product"
+            :data="invoice.invoiceData.products"
             >
             <template slot-scope="props">
                 <b-table-column field="name" label="Name">
@@ -164,7 +164,7 @@ export default {
               dueDate:new Date(),
               payerName: '',
               payerEmail: '',
-              product: [],
+              products: [],
               footer: '',
               discount: 0,
               templateNo: this.$route.query.templateNo,
@@ -199,13 +199,13 @@ export default {
     // },
     addProduct() {
       let newProduct = {
-        id: this.invoice.invoiceData.product.length + 1,
+        id: this.invoice.invoiceData.products.length + 1,
         name: '',
         description: '',
         price: 0,
         quantity: 0
       }
-      this.invoice.invoiceData.product.push(newProduct)
+      this.invoice.invoiceData.products.push(newProduct)
     },
 
     removeProduct(productId) {
@@ -214,7 +214,7 @@ export default {
         cancelText: 'Cancel',
         confirmText: 'Ok',
         onConfirm: () => {
-          this.invoice.invoiceData.product = this.invoice.invoiceData.product.filter(row => row.id != productId)
+          this.invoice.invoiceData.products = this.invoice.invoiceData.products.filter(row => row.id != productId)
           this.calculateTotal();
         }
       })
@@ -222,7 +222,7 @@ export default {
 
     calculateTotal() {
       var total = 0;
-      this.invoice.invoiceData.product.forEach(obj => {
+      this.invoice.invoiceData.products.forEach(obj => {
         total = total + (obj.price * obj.quantity);
       })
 

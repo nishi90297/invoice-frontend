@@ -13,8 +13,14 @@ import Vue from 'vue'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import NavBar from './components/NavBar'
+import moment from "moment";
 
 Vue.use(Buefy )
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    return moment(String(value)).format('MM/DD/YYYY')
+  }
+})
 
 export default {
   name: 'App',
