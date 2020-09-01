@@ -167,6 +167,7 @@ export default {
               products: [],
               footer: '',
               discount: 0,
+              productTotal:0,
               templateNo: this.$route.query.templateNo,
             },
           },
@@ -223,6 +224,7 @@ export default {
     calculateTotal() {
       var total = 0;
       this.invoice.invoiceData.products.forEach(obj => {
+        obj.productTotal = obj.price * obj.quantity;
         total = total + (obj.price * obj.quantity);
       })
 
