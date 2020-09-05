@@ -12,13 +12,13 @@
                 <div class="columns">
                     <div class="column is-6 ">
                       <span style="font-size: 25px; font-weight: bold; padding: 10px" class="has-background-warning" >INVOICE NUMBER:-  </span>
-                      <span style="font-size: 25px; font-weight: bold;  padding: 10px " class="has-text-primary has-background-warning">{{invoiceNumber}}</span>
+                      <span style="font-size: 25px; font-weight: bold;  padding: 10px " class="has-text-primary has-background-warning">{{invoice.invoiceNumber}}</span>
                       <hr class="has-background-dark">
                     </div>
                     <div class="column is-6">
                         <b-field label="Due Date">
                             <b-datepicker
-                                v-model="invoice.invoiceData.dueDate"
+                                v-model="invoice.dueDate"
                                 :show-week-number="showWeekNumber"
                                 :locale="locale"
                                 placeholder="Click to select..."
@@ -31,15 +31,23 @@
                 <div class="columns">
                     <div class="column is-6">
                       <b-field label="Payer Name">
-                        <b-input id= "payerName" v-model="invoice.invoiceData.payerName" type="text" placeholder="Enter Payer Name" required validation-message="Payer Name is required"></b-input>
+                        <b-input id= "payerName" v-model="invoice.payerName" type="text" placeholder="Enter Payer Name" required validation-message="Payer Name is required"></b-input>
                       </b-field>
                     </div>
                     <div class="column is-6">
                         <b-field label="Payer Email">
-                            <b-input id= "payerEmail" v-model="invoice.invoiceData.payerEmail" type="email" placeholder="Enter Payer Email"></b-input>
+                            <b-input id= "payerEmail" v-model="invoice.payerEmail" type="email" placeholder="Enter Payer Email"></b-input>
                         </b-field>
                     </div>
                 </div>
+                <div class="columns">
+                  <div class="column">
+                    <b-field label="Payer Address">
+                      <b-input maxlength="200" rows="2" type="textarea" id= "payerAddress" v-model="invoice.payerAddress"></b-input>
+                    </b-field>
+                  </div>
+                </div>
+
             </div>  
             <div class="column is-3 is-offset-1">
                 <b-field>
@@ -63,11 +71,11 @@
         </div>
     </div>
 
-    <div class="box" v-if="invoice.invoiceData.templateNo==1">
+    <div class="box" v-if="invoice.templateNo==1">
       <div class="columns">
         <div class="column">
           <b-field label="Free Text">
-            <b-input maxlength="200" rows="2" type="textarea" id= "freetext" v-model="invoice.invoiceData.freeText"></b-input>
+            <b-input maxlength="200" rows="2" type="textarea" id= "freetext" v-model="invoice.freeText"></b-input>
           </b-field>
         </div>
       </div>
@@ -75,7 +83,7 @@
 
     <div class="box">
         <b-table
-            :data="invoice.invoiceData.products"
+            :data="invoice.products"
             >
             <template slot-scope="props">
                 <b-table-column field="name" label="Name">
@@ -113,7 +121,7 @@
           <div class="column is-8">
             <div class="box">
               <b-field label="Footer">
-                <b-input maxlength="200" rows="3" type="textarea" id= "footer" v-model="invoice.invoiceData.footer"></b-input>
+                <b-input maxlength="200" rows="3" type="textarea" id= "footer" v-model="invoice.footer"></b-input>
               </b-field>
             </div>
           </div>
@@ -122,7 +130,7 @@
                 <div class="columns" style="font-size: 1.2rem;">
                   <div class="column">Discount :</div>
                     <div class="column">
-                      <b-select placeholder="Select Discount" expanded @input="calculateTotal" v-model="invoice.invoiceData.discount">
+                      <b-select placeholder="Select Discount" expanded @input="calculateTotal" v-model="invoice.discount">
                         <option value="10">10%</option>
                         <option value="20">20%</option>
                       </b-select>
@@ -132,7 +140,7 @@
               <div class="box">
                 <div class="columns has-text-weight-bold" style="font-size: 1.9rem;">
                   <div class="column ">Total  :</div>
-                  <div class="column has-text-right" >Rs {{invoice.total}}/- </div>
+                  <div class="column has-text-right" >Rs {{invoice.finalAmount}}/- </div>
                 </div>
               </div>
             </div>
@@ -157,19 +165,20 @@ export default {
 
     data() {
         return {
-          invoiceNumber:"",
           invoice: {
-            total: '',
-            invoiceData: {
-              dueDate:new Date(),
-              payerName: '',
-              payerEmail: '',
-              products: [],
-              footer: '',
-              discount: 0,
-              productTotal:0,
-              templateNo: this.$route.query.templateNo,
-            },
+            templateNo: this.$route.query.templateNo,
+            invoiceNumber:'',
+            payerName: '',
+            payerEmail: '',
+            payerAddress:'',
+            products: [],
+            dueDate:new Date(),
+            freeText: '',
+            footer: '',
+            discount: 0,
+            totalAmount: 0,
+            discountedAmount:0,
+            finalAmount:0,
           },
           // selected: new Date(),
           showWeekNumber: false,
@@ -200,13 +209,13 @@ export default {
     // },
     addProduct() {
       let newProduct = {
-        id: this.invoice.invoiceData.products.length + 1,
+        id: this.invoice.products.length + 1,
         name: '',
         description: '',
         price: 0,
         quantity: 0
       }
-      this.invoice.invoiceData.products.push(newProduct)
+      this.invoice.products.push(newProduct)
     },
 
     removeProduct(productId) {
@@ -215,7 +224,7 @@ export default {
         cancelText: 'Cancel',
         confirmText: 'Ok',
         onConfirm: () => {
-          this.invoice.invoiceData.products = this.invoice.invoiceData.products.filter(row => row.id != productId)
+          this.invoice.products = this.invoice.products.filter(row => row.id != productId)
           this.calculateTotal();
         }
       })
@@ -223,17 +232,16 @@ export default {
 
     calculateTotal() {
       var total = 0;
-      this.invoice.invoiceData.products.forEach(obj => {
-        obj.productTotal = obj.price * obj.quantity;
-        total = total + (obj.price * obj.quantity);
+      this.invoice.products.forEach(obj => {
+        // obj.productTotal = obj.price * obj.quantity;
+          total = total + (obj.price * obj.quantity);
       })
-
-      this.invoice.total = Math.round(total * (1 - (this.invoice.invoiceData.discount / 100)));
-
+      this.invoice.totalAmount = total;
+      this.invoice.discountedAmount = Math.round(total * (this.invoice.discount / 100));
+      this.invoice.finalAmount = this.invoice.totalAmount - this.invoice.discountedAmount;
     },
 
     createInvoiceContinue() {
-      // this.invoice.invoiceData.dueDate=this.invoice.invoiceData.dueDate.toJSON();
       axios({
         method: 'post',
         url: baseUrl + "/addInvoiceForm",
@@ -260,7 +268,7 @@ export default {
         }
       })
           .then(response => {
-            this.invoiceNumber = 'INV-'+response.data;
+            this.invoice.invoiceNumber = 'INV-'+response.data;
           })
           .catch(error => {
             this.failure(error.data)

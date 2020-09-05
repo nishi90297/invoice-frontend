@@ -4,7 +4,6 @@
     <list default="true" id="ab109f04-7818-4965-b788-099f55af50fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/CreateInvoice.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreateInvoice.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/SendingMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/SendingMode.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +52,10 @@
       <workItem from="1598620748944" duration="5951000" />
       <workItem from="1598718056318" duration="1789000" />
       <workItem from="1598888617872" duration="3306000" />
-      <workItem from="1598974251862" duration="1318000" />
+      <workItem from="1598974251862" duration="1382000" />
+      <workItem from="1599144185593" duration="1253000" />
+      <workItem from="1599288072339" duration="4097000" />
+      <workItem from="1599297124831" duration="1028000" />
     </task>
     <servers />
   </component>
