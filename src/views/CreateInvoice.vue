@@ -168,6 +168,7 @@ export default {
           invoice: {
             templateNo: this.$route.query.templateNo,
             invoiceNumber:'',
+            createdAt:'',
             payerName: '',
             payerEmail: '',
             payerAddress:'',

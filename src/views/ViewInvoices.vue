@@ -18,21 +18,21 @@
         focusable>
       <template slot-scope="props">
         <b-table-column field="payerName" label="Payer Name">
-          {{ props.row.invoiceData.payerName}}
+          {{ props.row.payerName}}
         </b-table-column>
         <b-table-column field="payerEmail" label="Payer Email">
-          {{ props.row.invoiceData.payerEmail}}
+          {{ props.row.payerEmail}}
         </b-table-column>
         <b-table-column field="dueDate" label="Due Date">
-          {{ props.row.invoiceData.dueDate  }}
+          {{ props.row.dueDate  }}
         </b-table-column>
         <b-table-column field="status" label="Status">
-          <span v-if="props.row.statusCode==101" class="has-text-warning has-text-weight-bold">{{ props.row.status}}</span>
-          <span v-if="props.row.statusCode==102" class="has-text-info has-text-weight-bold">{{ props.row.status}}</span>
-          <span v-if="props.row.statusCode==103" class="has-text-success has-text-weight-bold">{{ props.row.status}}</span>
+          <span v-if="props.row.statusCode==101" class="has-text-warning has-text-weight-bold">{{ props.row.invoiceStatus}}</span>
+          <span v-if="props.row.statusCode==102" class="has-text-info has-text-weight-bold">{{ props.row.invoiceStatus}}</span>
+          <span v-if="props.row.statusCode==103" class="has-text-success has-text-weight-bold">{{ props.row.invoiceStatus}}</span>
         </b-table-column>
         <b-table-column field="total" label="Total Amount">
-          {{ props.row.total}}
+          {{ props.row.finalAmount}}
         </b-table-column>
       </template>
     </b-table>

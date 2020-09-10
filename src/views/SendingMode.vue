@@ -1,5 +1,11 @@
 <template>
   <section class="section">
+    <div class="columns">
+      <div class="column has-text-centered is-size-3 has-text-primary">
+        <h1><b>Choose Sending Mode !</b></h1>
+      </div>
+    </div>
+
     <b-collapse class="card" animation="slide" aria-id="contentIdForA11y3">
       <div
           slot="trigger"
@@ -8,43 +14,18 @@
           role="button"
           aria-controls="contentIdForA11y3">
         <p class="card-header-title">
-          EMAIL <font-awesome-icon icon="envelope" />
+          <font-awesome-icon icon="envelope" />
         </p>
         <a class="card-header-icon">
+          <b-switch v-model="preferences.mail.useThis" ></b-switch>
           <b-icon
               :icon="props.open ? 'menu-down' : 'menu-up'">
           </b-icon>
         </a>
       </div>
       <div class="card-content">
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-          <a>#buefy</a>.
-        </div>
-      </div>
-      <footer class="card-footer">
-        <a class="card-footer-item">Save</a>
-        <a class="card-footer-item">Edit</a>
-        <a class="card-footer-item">Delete</a>
-      </footer>
-    </b-collapse>
 
     <div class="columns">
-      <div class="column has-text-centered is-size-3 has-text-primary">
-        <h1><b>Choose Sending Mode !</b></h1>
-      </div>
-    </div>
-    <div class="columns has-text-centered">
-      <div class="column">
-        <div class="box has-text-right has-background-white">
-          <div class="field ">
-            <b-switch v-model="preferences.mail.useThis" > <font-awesome-icon icon="envelope" /></b-switch>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns" v-if="preferences.mail.useThis">
       <div class="column is-6">
         <div class="box">
           <div class="column">
@@ -52,7 +33,7 @@
               <span class="has-text-primary">no-reply@invoicer.com</span>
             </p>
             <b-field label="Payer Email" class="mt3">
-              {{ invoice.invoiceData.payerEmail }}
+              {{ invoice.payerEmail }}
             </b-field>
             <b-field label="Mail Subject" class="mt3">
               <b-input maxlength="100" type="text" v-model="preferences.mail.subject" />
@@ -79,7 +60,7 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <p class="has-text-weight-bold">Dear {{invoice.invoiceData.payerName}},</p>
+                  <p class="has-text-weight-bold">Dear {{invoice.payerName}},</p>
                 </div>
               </div>
               <div class="columns">
@@ -90,7 +71,7 @@
                 <hr class="has-background-grey-lighter">
               <div class="columns">
                 <div class="column is-6">
-                  <p class="has-text-weight-bold">Rs {{invoice.total}}.00</p>
+                  <p class="has-text-weight-bold">Rs {{invoice.finalAmount}}.00 /-</p>
                 </div>
                 <div class="column is-6 has-text-right" >
                   <b-button class="button is-primary">
@@ -100,7 +81,7 @@
               </div>
               <div class="columns">
                 <div class="column">
-                  <p class="has-text-danger has-text-weight-bold">Due Date- {{invoice.invoiceData.dueDate | formatDate}}</p>
+                  <p class="has-text-danger has-text-weight-bold">Due Date- {{invoice.dueDate | formatDate}}</p>
                 </div>
                 <div class="column is-6 has-text-right" >
                   <b-button class="button is-primary">
@@ -124,7 +105,7 @@
               </div>
               <div class="columns">
                 <div class="column is-6">
-                  <p>Create At:</p>
+                  <p>Created At:</p>
                 </div>
                 <div class="column is-6">
                   <p>{{invoice.createdAt | formatDate}}</p>
@@ -135,7 +116,7 @@
                   <p>Total No. of products:</p>
                 </div>
                 <div class="column is-6">
-                  <p>{{invoice.invoiceData.products.length}}</p>
+                  <p>{{invoice.products.length}}</p>
                 </div>
               </div>
               <hr class="has-background-grey-lighter">
@@ -150,12 +131,15 @@
         </div>
       </div>
     </div>
+      </div>
+    </b-collapse>
     <div class="columns" style="position: fixed; bottom: 2%; right: 1%;width: 83.3%;" >
       <div class="column has-text-right has-background-primary ">
         <b-button @click="sendModeContinue()">Continue</b-button>
       </div>
     </div>
   </section>
+
 </template>
 
 <script>
