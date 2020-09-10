@@ -214,7 +214,8 @@ export default {
         name: '',
         description: '',
         price: 0,
-        quantity: 0
+        quantity: 0,
+        total :0
       }
       this.invoice.products.push(newProduct)
     },
@@ -234,7 +235,8 @@ export default {
     calculateTotal() {
       var total = 0;
       this.invoice.products.forEach(obj => {
-        // obj.productTotal = obj.price * obj.quantity;
+        obj.total = obj.price * obj.quantity;
+        console.log(obj.total)
           total = total + (obj.price * obj.quantity);
       })
       this.invoice.totalAmount = total;
@@ -243,6 +245,9 @@ export default {
     },
 
     createInvoiceContinue() {
+      console.log(this.invoice)
+
+      console.log(this.invoice.products)
       axios({
         method: 'post',
         url: baseUrl + "/addInvoiceForm",

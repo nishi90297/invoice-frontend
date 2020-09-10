@@ -10,7 +10,7 @@
         :default-sort-direction="defaultSortDirection"
         :sort-icon="sortIcon"
         :sort-icon-size="sortIconSize"
-        default-sort="billerList.first.name"
+        default-sort="invoiceList.first.name"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
         aria-page-label="Page"
